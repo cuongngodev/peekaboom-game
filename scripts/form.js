@@ -1,4 +1,9 @@
 "use strict"
+
+/**
+ * Main initialization function for the player registration form
+ * Sets up event listeners and form validation
+ */
 $(document).ready(() => {
     $('.warning').hide(); // turn off all warning
     let isTwoPlayers = true;
@@ -26,18 +31,40 @@ $(document).ready(() => {
         event.preventDefault();
         handleSubmit();
     })
+
+    /**
+     * Shows or hides a warning message element
+     * @param {string} eleId - The ID of the element to show/hide
+     * @param {boolean} show - Whether to show (true) or hide (false) the element
+     */
     function showWarningMessage(eleId,show)
     {
         show? $(`#${eleId}`).show(): $(`#${eleId}`).hide()
     }
+
+    /**
+     * Validates if a player name is empty or contains only whitespace
+     * @param {string} name - The player name to validate
+     * @returns {boolean} True if name is invalid (empty), false if valid
+     */
     function isNotValidName(name){
         return name.trim().length === 0
     }
+
+    /**
+     * Validates if a player age is within the valid range (10-99) and not empty
+     * @param {string|number} age - The player age to validate
+     * @returns {boolean} True if age is invalid (out of range or empty), false if valid
+     */
     function isNotValidAge(age){
         // age = parseInt(age)
         return age < 10 && age > 99 || age.trim().length === 0
     }
 
+    /**
+     * Handles form submission, validates all inputs, and saves data to localStorage
+     * Redirects to character selection page if validation passes
+     */
     function handleSubmit() {
         let isValid = true;
         //Player 1
@@ -99,7 +126,12 @@ $(document).ready(() => {
             window.location.href = './pages/characters.html';
         }
     }
-    /* RemoveWarningWhenKeyDown function is used to turn off warningError message in the event user type key down, it takes the the id of the input and the error message id as the 2nd para */
+
+    /**
+     * Attaches a keydown event listener to remove warning messages when user starts typing
+     * @param {jQuery} element - The input element to attach the listener to
+     * @param {jQuery} errorElement - The error message element to hide on keydown
+     */
     function RemoveWarningWhenKeyDown(element, errorElement ){
             element.on('keydown', () => {
                 errorElement.hide()

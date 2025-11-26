@@ -1,4 +1,12 @@
-// Call when page loads
+/**
+ * @file gameplay.js
+ * @description Core game mechanics for PeeKaBoom - handles player movement, Pikachu watching cycles, timer, and win/lose conditions
+ */
+
+/**
+ * Initializes the game when the page loads
+ * Sets up initial game state and UI elements
+ */
 $(document).ready(async () => {
     // $('#character-confirm').hide();
     await initializeGameplay();
@@ -22,11 +30,18 @@ const PIKACHU_WATCH = "/watcher/pikachu/pikachu-watch.png";
 const FINISH_LINE = 95;
 const MOVE_SPEED = 2;
 // =============================================================================
+
 // Key controls
 const keys = {
     ArrowRight: false,
     d: false
 };
+
+/**
+ * Starts the game with the selected difficulty
+ * Initializes game state, resets player positions, starts Pikachu movement and game loop
+ * @global
+ */
 window.startGame = function() {
     // make this function global
     // - Initializes game state
@@ -53,7 +68,11 @@ window.startGame = function() {
     startPikachuMovement();
     startGameLoop();
 }
-// Sets game time limit based on chosen difficulty
+
+/**
+ * Sets the game time limit based on the chosen difficulty level
+ * @param {string} level - The difficulty level ('easy' or 'hard')
+ */
 function setDifficulty(level) {
     timeLimit = level === 'easy' ? 20 : 15;
     timeLeft = timeLimit;
@@ -62,7 +81,10 @@ function setDifficulty(level) {
     startGame();
 }
 
-// Starts countdown timer based on difficulty
+/**
+ * Starts the countdown timer based on the selected difficulty
+ * Updates the timer display every second and ends the game when time runs out
+ */
 function startTimer() {
     timeLeft = timeLimit;
     gameTimer = setInterval(() => {
@@ -74,14 +96,21 @@ function startTimer() {
         }
     }, 1000);
 }
-// Stops and resets game timer
+
+/**
+ * Stops the game timer and resets the display to 0
+ */
 function stopTimer() {
     clearInterval(gameTimer);
     timeLeft = 0;
     $('#timeDisplay').text(timeLeft);
  }
- // Pikachu Control
-function togglePikachu(isWatching) {
+
+ /**
+  * Toggles Pikachu's watching state and updates the visual sprite
+  * @param {boolean} isWatching - True if Pikachu is watching, false otherwise
+  */
+ function togglePikachu(isWatching) {
     let pikachu = $('#pikachu');
     if (isWatching) {
         pikachu.attr('src',PIKACHU_WATCH);
@@ -93,6 +122,11 @@ function togglePikachu(isWatching) {
     console.log("Toggled Pikachu:", isWatching ? "watching" : "not watching");
 
 }
+
+/**
+ * Controls Pikachu's watching/not watching cycle
+ * Randomly toggles between states, updates UI, and triggers movement checks
+ */
 function startPikachuMovement() {
     //- Controls pikachu's watching/not watching states
     // - Toggles pikachu animation
@@ -113,6 +147,10 @@ function startPikachuMovement() {
     }, Math.random() * 2000 + 1000);
 }
 
+/**
+ * Checks if any player is moving while Pikachu is watching
+ * Ends the game if a player is caught moving
+ */
 function checkMovement() {
 // - Called when pikachu turns to watch
 // - Checks if any player is moving
@@ -126,7 +164,11 @@ function checkMovement() {
         // resetGame();
     }
 }
-// Controls player movement based on key presses when Pikachu isn't watching
+
+/**
+ * Controls player movement based on key presses when Pikachu isn't watching
+ * Updates player positions at 50ms intervals
+ */
 function startGameLoop() {
     moveInterval = setInterval(() => {
         if (!isPikachuWatching) {
@@ -141,14 +183,22 @@ function startGameLoop() {
         }
     }, 50);
 }
-// Updates visual position of players on screen
+
+/**
+ * Updates the visual position of both players on the screen
+ * Applies CSS positioning based on player position percentages
+ */
 function updatePlayerPositions() {
 // - Updates CSS left position of player elements
 // - Moves players based on player1Pos/player2Pos values
     $('#player1').css('left', player1Pos + '%');
     $('#player2').css('left', player2Pos + '%');
 }
-// Detects if players move while Pikachu is watching
+
+/**
+ * Checks if any player has reached the finish line and declares a winner
+ * Ends the game when a player crosses the finish line threshold
+ */
 function checkWinner() {
     const playerData = JSON.parse(localStorage.getItem('gameState'));
     if (player1Pos >= FINISH_LINE) {
@@ -161,6 +211,11 @@ function checkWinner() {
     }
 }
 
+/**
+ * Ends the game and displays the result message
+ * Stops all game loops, intervals, and shows the play again button
+ * @param {string} message - The message to display (win/lose condition)
+ */
 function endGame(message) {
 // - Stops game loops and intervals
 // - Updates status with win/lose message  
@@ -178,6 +233,10 @@ function endGame(message) {
     // modal.style.display = 'flex';
 }
 
+/**
+ * Resets all game states, positions, timers, and UI to initial state
+ * Prepares the game for a new round
+ */
 function resetGame() {
     // Resets all game states, positions, timers, and UI to initial state
 
@@ -203,6 +262,8 @@ function resetGame() {
     // $('#restart-btn').show();
 }
 
+// ========================= Event Listeners =========================
+
 // Event Listeners
 document.addEventListener('keydown', (event) => {
     if (gameState === 'playing' && (event.key === 'ArrowRight' || event.key === 'd')) {
@@ -217,7 +278,16 @@ document.addEventListener('keyup', (event) => {
 });
 
 // startBtn.addEventListener('click', startGame);
-// Fetches character images from API or local storage
+
+// ========================= Character & Image Management =========================
+
+/**
+ * Fetches character images from PokeAPI or local storage based on character type
+ * @param {Object} playerData - Object containing character type and name/id
+ * @param {string} playerData.type - Either 'pokemon' or 'squid'
+ * @param {string|number} playerData.character - Pokemon name or Squid character index
+ * @returns {Promise<string|null>} The image URL or null if error occurs
+ */
 async function getCharacterImage(playerData) {
     try {
         // Log the incoming data to debug
@@ -256,7 +326,11 @@ async function getCharacterImage(playerData) {
     }
 }
 
-// Initializes player characters and skins from saved state
+/**
+ * Initializes player characters and skins from saved game state
+ * Loads character images and applies skin colors to player elements
+ * @async
+ */
 async function initializeGameplay() {
     $('#character-confirm')
     const gameState = JSON.parse(localStorage.getItem('gameState'));
@@ -284,10 +358,17 @@ async function initializeGameplay() {
 
     }
 }
+
+/**
+ * Hides the game control panel with a fade-out animation
+ */
 function hideGameControls() {
     $('.game-controls').fadeOut();
  }
  
+ /**
+  * Shows the game control panel with a fade-in animation
+  */
  function showGameControls() {
     $('.game-controls').fadeIn();
  }
