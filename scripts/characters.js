@@ -1,3 +1,12 @@
+/**
+ * @file characters.js
+ * @description Handles character selection, customization, and game initialization for PeeKaBoom
+ * Manages Pokemon and Squid Game character loading, player profiles, and game state
+ */
+
+/**
+ * Main initialization - Sets up character selection interface and game state management
+ */
 $(document).ready(() => {
 
     // $(".players-container").hide();
@@ -24,7 +33,10 @@ $(document).ready(() => {
         }
     };
 
-    // Player Profile Management, it is used to set player profile img
+    /**
+     * Player Profile Management - handles setting and resetting player profile images
+     * @namespace PlayerProfiles
+     */
     const PlayerProfiles = {
         async setProfile(playerId, type, character) {
             //Sets player image based on character type (pokemon/squid)
