@@ -38,6 +38,13 @@ $(document).ready(() => {
      * @namespace PlayerProfiles
      */
     const PlayerProfiles = {
+        /**
+         * Sets player profile image based on character type (Pokemon or Squid Game)
+         * @async
+         * @param {string} playerId - The player ID ('player1' or 'player2')
+         * @param {string} type - Character type ('pokemon' or 'squid')
+         * @param {string|number} character - Pokemon name or Squid character index
+         */
         async setProfile(playerId, type, character) {
             //Sets player image based on character type (pokemon/squid)
             const profileImg = $(`#${playerId}Image`);
@@ -58,6 +65,10 @@ $(document).ready(() => {
             }
         },
 
+        /**
+         * Resets both players to their default profile characters
+         * @async
+         */
         async resetProfiles() {
             //Resets both players to default profiles
             const player1 = CONFIG.DEFAULT_PROFILES.player1;
