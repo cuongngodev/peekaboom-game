@@ -7,6 +7,7 @@ A fun, interactive browser-based game inspired by the "Red Light, Green Light" c
 ## 📖 Table of Contents
 
 - [Overview](#overview)
+- [Game Gallery](#game-gallery)
 - [Features](#features)
 - [Game Rules](#game-rules)
 - [Technologies Used](#technologies-used)
@@ -22,6 +23,68 @@ A fun, interactive browser-based game inspired by the "Red Light, Green Light" c
 ## 🎯 Overview
 
 PeeKaBoom is a multiplayer racing game where players must move their characters to the finish line without being caught by the watchful eyes of Pikachu. The game combines character customization, timing-based gameplay, and competitive racing mechanics to create an engaging experience.
+
+## 🖼️ Game Gallery
+
+### Squid Game Characters
+Meet the characters from the hit series Squid Game that you can play as:
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="public/seong-gi-hun.png" width="150" alt="Seong Gi-hun"/><br/>
+      <b>Seong Gi-hun</b><br/>
+      Player 456
+    </td>
+    <td align="center">
+      <img src="public/cho-sang-woo.png" width="150" alt="Cho Sang-woo"/><br/>
+      <b>Cho Sang-woo</b><br/>
+      Player 218
+    </td>
+    <td align="center">
+      <img src="public/kang-sae-byeok.png" width="150" alt="Kang Sae-byeok"/><br/>
+      <b>Kang Sae-byeok</b><br/>
+      Player 067
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="public/oh-il-nam.png" width="150" alt="Oh Il-nam"/><br/>
+      <b>Oh Il-nam</b><br/>
+      Player 001
+    </td>
+    <td align="center">
+      <img src="public/jang-deok-su.png" width="150" alt="Jang Deok-su"/><br/>
+      <b>Jang Deok-su</b><br/>
+      Player 101
+    </td>
+  </tr>
+</table>
+
+### The Watcher
+The game's referee - Pikachu watches over the race and catches players who move at the wrong time!
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="watcher/pikachu/pikachu-watch.png" width="200" alt="Pikachu Watching"/><br/>
+      <b>Pikachu - Watching</b><br/>
+      Don't move! 👀
+    </td>
+    <td align="center">
+      <img src="watcher/pikachu/pikachu-dont-watch.png" width="200" alt="Pikachu Not Watching"/><br/>
+      <b>Pikachu - Not Watching</b><br/>
+      Move now! 🏃
+    </td>
+  </tr>
+</table>
+
+### Pokemon Characters
+Choose from powerful Pokemon characters (fetched dynamically from PokeAPI):
+- 🔥 **Charizard** - The fire-flying dragon
+- 🐉 **Dragonite** - The powerful dragon type
+- 🦊 **Eevee** - The evolution Pokemon
+- 🌊 **Gyarados** - The intimidating sea serpent
 
 ## ✨ Features
 
@@ -73,57 +136,6 @@ PeeKaBoom is a multiplayer racing game where players must move their characters 
 - **LocalStorage**: Saving game state and player data
 
 ## 📁 Project Structure
-
-```
-peekaboom-game/
-├── index.html                          # Landing page with player registration
-├── README.md                           # Project documentation
-├── logo/
-│   └── peekaboom_logo.jpg             # Game logo
-├── package.json/
-│   └── squid-game-characters.json     # Squid Game character data
-├── pages/
-│   └── characters.html                # Character selection and gameplay page
-├── public/
-│   ├── cho-sang-woo.png              # Character images
-│   ├── jang-deok-su.png
-│   ├── kang-sae-byeok.png
-│   ├── oh-il-nam.png
-│   └── seong-gi-hun.png
-├── scripts/
-│   ├── characters.js                  # Character selection logic
-│   ├── form.js                        # Form validation and submission
-│   └── gameplay.js                    # Core game mechanics
-├── styles/
-│   ├── game-design.css               # Game styling
-│   └── start-page.css                # Landing page styling
-└── watcher/
-    └── pikachu/
-        ├── pikachu-dont-watch.png    # Pikachu not watching sprite
-        └── pikachu-watch.png         # Pikachu watching sprite
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- No additional installations required!
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/cuongngodev/peekaboom-game.git
-   ```
-
-2. **Navigate to project directory**
-   ```bash
-   cd peekaboom-game
-   ```
-
-3. **Open in browser**
-   - Simply open `index.html` in your web browser
-
 ## 🎮 How to Play
 
 ### Step 1: Player Registration
@@ -237,32 +249,6 @@ Currently, the code uses procedural programming with global variables and functi
 - Defeat sound
 - Button click sounds
 - Character selection sound
-
-### 📖 Documentation
-
-- [ ] Add JSDoc comments to all functions
-- [ ] Create API documentation
-- [ ] Add inline code comments for complex logic
-- [ ] Create developer setup guide
-- [ ] Document game architecture diagrams
-
-
----
-
-## �🚧 Future Enhancements
-
-### Planned Features
-- [ ] Single player mode with AI opponent
-- [ ] Score tracking and leaderboard
-- [ ] Sound effects and background music
-- [ ] Mobile touch controls support
-- [ ] Power-ups and obstacles
-- [ ] Multiple race tracks/themes
-- [ ] Multiplayer online mode
-- [ ] Character animations
-- [ ] Achievement system
-- [ ] Save game history
-
 ## 👨‍💻 Author
 
 **cuongngodev**
@@ -272,8 +258,6 @@ Currently, the code uses procedural programming with global variables and functi
 
 - Squid Game for character inspiration
 - [PokeAPI](https://pokeapi.co/) for Pokemon data and images
-- jQuery team for the excellent library
-
 ---
 
 **Enjoy the game 🎮🏆**
