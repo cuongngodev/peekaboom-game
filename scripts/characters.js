@@ -78,7 +78,10 @@ $(document).ready(() => {
         }
     };
 
-    // Game State Management
+    /**
+     * Game State Management - manages character selection, skins, and localStorage persistence
+     * @namespace GameState
+     */
     const GameState = {
         selectedCharacters: { //Updates character selection and profile image
             player1: null,
